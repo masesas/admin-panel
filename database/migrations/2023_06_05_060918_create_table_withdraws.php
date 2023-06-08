@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('users_id')->unsigned()->index()->nullable();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
-            $table->bigInteger('amount');
-            $table->date('request_date');
+            $table->decimal('amount');
             $table->string('status');
+            $table->date('request_date');
+            $table->date('updated_at')->nullable();
         });
     }
 

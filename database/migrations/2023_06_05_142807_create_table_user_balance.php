@@ -21,9 +21,9 @@ return new class extends Migration
             //$table->bigInteger('bank_account_id')->unsigned()->index()->nullable();
             //$table->foreign('bank_account_id')->references('id')->on('bank_account')->onDelete('cascade');
 
-            $table->bigInteger('kredit');
-            $table->bigInteger('debit');
-            $table->bigInteger('balance');
+            $table->decimal('kredit');
+            $table->decimal('debit');
+            $table->decimal('balance');
             $table->string('keterangan', 200);
             $table->timestamps();
         });

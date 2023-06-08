@@ -31,7 +31,7 @@ Route::post('logout', [LoginController::class, 'destroy'])
 Route::get('register', [RegistrasiController::class, 'index'])
     ->name('register');
 
-Route::post('register', [RegistrasiController::class, 'index'])
+Route::post('register', [RegistrasiController::class, 'store'])
     ->name('register');
 
 Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'control', 'as' => 'backend.', 'middleware' => ['sidebar_backend']], function () {
@@ -39,7 +39,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'contro
         return redirect('control/dashboard');
     });
 
-    Route::get('dashboard', 'BackendController@index')->name('dashboard');
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
     // * report
     Route::get('report-general', 'ReportController@general')->name('report_general');
@@ -51,4 +51,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'contro
     // * withdraws
     Route::get('withdraws', 'WithdrawsController@index')->name('withdraws');
     Route::get('withdraws-list', 'WithdrawsController@indexDataTable')->name('withdraws_list');
+
+    // * users
+    Route::get('users', 'UsersController@index')->name('users');
+    Route::get('users-list', 'UsersController@indexDataTable')->name('users_list');
+    Route::get('users-profile/{id}', 'UsersController@storeProfileUser')->name('users_profile');
+
+    Route::post('save-profile', 'UsersController@saveProfile')->name('save_profile');
+    Route::post('save-bank-account', 'BankAccountController@saveBankAccount')->name('save_bank_account');
+
+    Route::post('withdraw-request', 'WithdrawsController@withdrawRequest')->name('withdraw_request');
+    Route::post('withdraw-approve', 'WithdrawsController@approveWithdraw')->name('withdraw_approve');
 });

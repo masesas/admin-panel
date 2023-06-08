@@ -10,7 +10,7 @@
         $text = 'Info';
     }
     ?>
-    <a class='btn btn-primary' data-toggle="tooltip" title="Print" href="{{ '#' }}">
-        <i class="bi bi-printer"></i> {{ $text }}
+    <a class='btn-act btn-act-primary btn-act-md' data-toggle="tooltip" title="Print" data-json="{{ json_encode($wd) }}" data-balance="{{ $balance }}" href="javascript:;"  id="btn-approval">
+        {{ $text }}
     </a>
 </div>

@@ -36,7 +36,6 @@ class LoginController extends Controller {
 
         return back()->withErrors([
             'email' => 'Pastikan Email dan Password mu Benar',
-            'overlay' => true,
         ])->onlyInput('email');
     }
 

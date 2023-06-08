@@ -1,6 +1,7 @@
 @props(['errors'])
 
 @if ($errors->any())
+    <?php //\Log::warning($errors); ?>
     <div {{ $attributes }}>
         <div class="font-medium text-red-600">
             Terjadi Kesalahan

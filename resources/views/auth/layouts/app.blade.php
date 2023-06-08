@@ -33,6 +33,9 @@
 </head>
 
 <body>
+    <div id="loadOverlay"
+        style="background-color:white; position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:2000;">
+    </div>
     <div class="font-sans text-gray-900 antialiased">
         @yield('content')
     </div>

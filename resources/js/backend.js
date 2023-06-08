@@ -1,20 +1,20 @@
 import '../css/backend.css';
 import '../lib/bootstrap/css/bootstrap.min.css';
 import '../lib/bootstrap-icons/bootstrap-icons.css';
-// import '../lib/boxicons/css/boxicons.min.css';
-// import '../lib/quill/quill.snow.css';
-// import '../lib/quill/quill.bubble.css';
-// import '../lib/remixicon/remixicon.css';
-// import '../lib/simple-datatables/style.css';
+import '../lib/boxicons/css/boxicons.min.css';
+import '../lib/quill/quill.snow.css';
+import '../lib/quill/quill.bubble.css';
+import '../lib/remixicon/remixicon.css';
+import '../lib/simple-datatables/style.css';
 
-//import '../lib/apexcharts/apexcharts.min.js';
+import '../lib/apexcharts/apexcharts.min.js';
 import '../lib/bootstrap/js/bootstrap.bundle.min.js';
-// import '../lib/chart.js/chart.umd.js';
-// import '../lib/echarts/echarts.min.js';
-// import '../lib/quill/quill.min.js';
-// import '../lib/simple-datatables/simple-datatables.js';
-// import '../lib/tinymce/tinymce.min.js';
-// import '../lib/php-email-form/validate.js';
+import '../lib/chart.js/chart.umd.js';
+import '../lib/echarts/echarts.min.js';
+import '../lib/quill/quill.min.js';
+import '../lib/simple-datatables/simple-datatables.js';
+import '../lib/tinymce/tinymce.min.js';
+import '../lib/php-email-form/validate.js';
 
 
 (function () {

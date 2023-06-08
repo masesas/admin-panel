@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\SessionKeyModel;
 use Closure;
 use Illuminate\Support\Facades\Request;
 use Menu;
+use Session;
 
 class GenerateMenus {
     /**
@@ -64,6 +66,22 @@ class GenerateMenus {
                 ->link->attr([
                     'class' => 'nav-link',
                 ]);
+
+            $userSession = Session::get(SessionKeyModel::USER_LOGIN);
+            if($userSession->tipe_user === 'admin'){
+                $menu->add('<i class=" bi bi-person"></i> Users', [
+                    'route' => 'backend.users',
+                    'class' => 'nav-item',
+                ])
+                    ->data([
+                        'order'         => 3,
+                        'activematches' => 'control/users*',
+                    ])
+                    ->link->attr([
+                        'class' => 'nav-link',
+                    ]);
+            }
+
 
             // Set Active Menu
             $menu->filter(function ($item) {

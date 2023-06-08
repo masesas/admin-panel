@@ -82,3 +82,7 @@
     border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
     border-radius: 1.4rem;
 }
+
+#loadOverlay {
+    display: none;
+}

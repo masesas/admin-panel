@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\UserModel;
 use App\Providers\RouteServiceProvider;
+use DB;
 use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class RegistrasiController extends Controller {
 
@@ -17,23 +19,30 @@ class RegistrasiController extends Controller {
 
 
     public function store(Request $request) {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        DB::beginTransaction();
+        try {
+            $check = UserModel::whereRaw("email = '$request->email'")->first();
+            if (!empty($check)) {
+                return back()->withErrors([
+                    'email' => 'Email Yg Kamu Masukkan Sudah Terdaftar, Gunakan Email Lain Atau Lanjutkan Login',
+                    'overlay' => true,
+                ])->onlyInput('email');
+            }
 
-        $email = $request->email;
-        $password = $request->password;
+            UserModel::create($request->all());
 
-        $userModel = UserModel::where('email', $email)->where('password', $password)->first();
-        if (!empty($userModel)) {
-            Session::put('user_login', $userModel);
+            DB::commit();
 
-            return redirect(RouteServiceProvider::HOME);
+            Flash::success('Registrasi Berhasil, Silahkan Lanjutkan Login');
+            
+            return redirect('login');
+        } catch (Throwable $e) {
+            DB::rollBack();
+
+            return back()->withErrors([
+                'email' => 'Gagal Registrasi, Error >>> ' . $e->getMessage(),
+                'overlay' => true,
+            ])->onlyInput('email');
         }
-
-        return back()->withErrors([
-            'email' => 'Pastikan Email dan Password mu Benar',
-        ])->onlyInput('email');
     }
 }
