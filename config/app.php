@@ -210,6 +210,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //import / export excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*

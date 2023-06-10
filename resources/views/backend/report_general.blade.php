@@ -14,7 +14,6 @@
 @endsection
 
 @section('content')
-    <?php $data = []; ?>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -52,10 +51,15 @@
                                         class="btn-act btn-act-primary btn-act-md">
                                         <i class="bi bi-plus-circle"></i> Tambah
                                     </a>
+                                    <button class="btn-act btn-act-primary btn-act-md" id="btn-upload">
+                                        <i class="bi bi-arrow-up-circle"></i> Upload
+                                    </button>
+                                    @include('backend.includes.modal_upload_general')
                                 @endif
-                                <button type="button" class="btn-act btn-act-primary btn-act-md">
+                                <a class="btn-act btn-act-primary btn-act-md" href="{{ route('backend.export_general') }}"
+                                    target="_blank">
                                     <i class="bi bi-arrow-down-circle"></i> Download
-                                </button>
+                                </a>
                                 {{-- <button type="button" class="btn-act btn-act-primary btn-act-md" id="btn-refresh">
                                     <i class="bi bi-plus-circle"></i> Refresh
                                 </button> --}}
@@ -174,6 +178,16 @@
 
         $("#btn-refresh").click(() => {
             table.draw();
+        });
+
+        $("#btn-upload").click((event) => {
+            event.preventDefault();
+            $('#m_upload_general').modal('show');
+        });
+
+        $("#btn-upload-general").click((event) => {
+            event.preventDefault();
+            document.getElementById('form-upload-general').submit();
         });
     </script>
 @endpush

@@ -148,6 +148,10 @@
                         $('#amount').val(withdrawsData.amount);
                         $('#m_withdraws').modal('show');
                         break;
+                    default:
+                        const url = $(this).attr('data-url-invoice');
+                        window.open(url, '_blank');
+                        break;
                 }
             }
         });

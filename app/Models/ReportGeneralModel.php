@@ -11,4 +11,6 @@ class ReportGeneralModel extends BaseModel {
     protected $table = 'report_general';
 
     protected $fillable = [];
+
+    
 }

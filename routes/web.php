@@ -47,10 +47,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'contro
 
     Route::get('general-list', 'ReportController@generalDataTable')->name('general_list');
     Route::post('save-general', 'ReportController@saveGeneral')->name('save_general');
+    Route::get('export-general', 'ReportController@exportGeneral')->name('export_general');
+    Route::post('import-general', 'ReportController@importGeneral')->name('import_general');
 
     // * withdraws
     Route::get('withdraws', 'WithdrawsController@index')->name('withdraws');
     Route::get('withdraws-list', 'WithdrawsController@indexDataTable')->name('withdraws_list');
+    Route::post('withdraw-request', 'WithdrawsController@withdrawRequest')->name('withdraw_request');
+    Route::post('withdraw-approve', 'WithdrawsController@approveWithdraw')->name('withdraw_approve');
+    Route::get('withdraws-invoice/{id}', 'WithdrawsController@invoiceWithdraws')->name('withdraws_invoice');
 
     // * users
     Route::get('users', 'UsersController@index')->name('users');
@@ -59,7 +64,4 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'contro
 
     Route::post('save-profile', 'UsersController@saveProfile')->name('save_profile');
     Route::post('save-bank-account', 'BankAccountController@saveBankAccount')->name('save_bank_account');
-
-    Route::post('withdraw-request', 'WithdrawsController@withdrawRequest')->name('withdraw_request');
-    Route::post('withdraw-approve', 'WithdrawsController@approveWithdraw')->name('withdraw_approve');
 });

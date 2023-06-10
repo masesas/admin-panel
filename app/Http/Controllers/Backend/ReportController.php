@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\GeneralReportExport;
 use App\Http\Controllers\Controller;
+use App\Imports\GeneralReportImport;
 use App\Models\ReportGeneralModel;
 use App\Models\SessionKeyModel;
 use App\Models\UserModel;
 use DB;
 use Flash;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Throwable;
 use Yajra\DataTables\DataTables;
 
@@ -112,5 +115,24 @@ class ReportController extends Controller {
 
             return redirect()->back();
         }
+    }
+
+    public function exportGeneral(Request $request) {
+        return Excel::download(new GeneralReportExport, 'Report General.xlsx');
+    }
+
+    public function importGeneral(Request $request) {
+        try {
+            \Log::warning($request);
+            $file = $request->file('upload_file');
+
+            Excel::import(new GeneralReportImport(), $file);
+
+            Flash::success('File Berhasil di Import');
+        } catch (Throwable $e) {
+            Flash::error('Error Upload >>> ' . $e->getMessage());
+        }
+
+        return back();
     }
 }

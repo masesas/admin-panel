@@ -10,7 +10,7 @@
         $text = 'Info';
     }
     ?>
-    <a class='btn-act btn-act-primary btn-act-md' data-toggle="tooltip" title="Print" data-json="{{ json_encode($wd) }}" data-balance="{{ $balance }}" href="javascript:;"  id="btn-approval">
+    <a class='btn-act btn-act-primary btn-act-md' data-toggle="tooltip" title="Print" data-json="{{ json_encode($wd) }}" data-balance="{{ $balance }}" data-url-invoice="{{ $urlInvoice }}" href="javascript:;"  id="btn-approval">
         {{ $text }}
     </a>
 </div>

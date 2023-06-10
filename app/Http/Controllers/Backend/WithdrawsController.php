@@ -64,8 +64,9 @@ class WithdrawsController extends Controller {
             ->addColumn('action', function (WithdrawModel $wd) {
                 $lastBalance =  UserModel::lastBalanceByUserId($wd->users_id);
                 $balance = !empty($lastBalance) ? $lastBalance->balance : 0;
+                $urlInvoice = route('backend.withdraws_invoice', [$wd->id]) ;
 
-                return view('backend.includes.act_wd', compact('wd', 'balance'));
+                return view('backend.includes.act_wd', compact('wd', 'balance', 'urlInvoice'));
             })
             ->rawColumns([
                 'user',
@@ -181,5 +182,11 @@ class WithdrawsController extends Controller {
                 'reopenModal' => true
             ]);
         }
+    }
+
+    public function invoiceWithdraws($id) {
+        $withdraws = WithdrawModel::invoiceWithdrawsById($id);
+
+        return view('backend.invoice_withdraws', compact('withdraws'));
     }
 }
