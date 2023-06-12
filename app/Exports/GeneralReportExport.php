@@ -21,12 +21,12 @@ class GeneralReportExport implements FromCollection, WithHeadings {
      * @return \Illuminate\Support\Collection
      */
     public function collection() {
-        if ($this->userSession->tipe_user === 'admin') {
+        /* if ($this->userSession->tipe_user === 'admin') {
             $data = ReportGeneralModel::byUserId($this->userSession->id)->get();
         } else {
             $data = [];
-        }
-
+        } */
+        $data = ReportGeneralModel::all();
         return (object)$data;
     }
 

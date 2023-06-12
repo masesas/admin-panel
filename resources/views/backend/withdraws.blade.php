@@ -153,6 +153,9 @@
                         window.open(url, '_blank');
                         break;
                 }
+            } else {
+                const url = $(this).attr('data-url-invoice');
+                window.open(url, '_blank');
             }
         });
 

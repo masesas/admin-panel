@@ -142,7 +142,7 @@ class WithdrawsController extends Controller {
     public function approveWithdraw(Request $request) {
         DB::beginTransaction();
         try {
-            $withdraw = WithdrawModel::byId($request->withdrawId);
+            $withdraw = WithdrawModel::byId($request->withdrawId)->first();
             if (empty($withdraw)) {
                 Flash::error('Withdraw Tidak Valid');
 
@@ -154,12 +154,12 @@ class WithdrawsController extends Controller {
                 'status' => $status
             ]);
 
-            if ($status === 'aproved') {
+            if ($status === 'approved') {
                 $validateBalance = UserModel::lastBalanceByUserId($withdraw->users_id);
                 $balance = !empty($validateBalance) ? ((int)$validateBalance->balance) : 0;
 
                 UserBalanceModel::query()->insert([
-                    'users_id' => $request->userId,
+                    'users_id' => $withdraw->users_id,
                     'debit' => $withdraw->amount,
                     'balance' => $balance - (int)$withdraw->amount,
                     'keterangan' => 'withdraws',

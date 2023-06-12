@@ -37,7 +37,9 @@ class UserModel extends BaseModel
                 FROM
                     users u1
                     LEFT JOIN bank_account b1 ON u1.id = b1.users_id
-                    LEFT JOIN ( SELECT MAX( ID ) AS ID, balance, users_id FROM users_balance GROUP BY users_id ) AS MAX_BALANCE ON u1.id = MAX_BALANCE.users_id
+                    LEFT JOIN (
+                        SELECT us1.* FROM users_balance us1 INNER JOIN ( SELECT MAX( ID ) AS ID, balance, users_id FROM users_balance GROUP BY users_id ) us2 ON us1.id = us2.ID
+                    ) AS MAX_BALANCE ON u1.id = MAX_BALANCE.users_id
                 WHERE
                     u1.id = '$userId'";
         $query = \DB::select($sql);
